@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import 'package:provider/provider.dart';
@@ -20,7 +21,7 @@ class RecipeApp extends StatelessWidget {
       create: (context) => MyAppState(),
       child: MaterialApp(
         title: 'Recipe App',
-        home: MyHomePage(),
+        home: const LoginPage(),
       ),
     );
   }
@@ -124,6 +125,23 @@ class MyAppState extends ChangeNotifier {
     }
     isLoggedIn = false;
     notifyListeners();
+  }
+}
+
+class LoginPage extends StatelessWidget {
+  const LoginPage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final appState = context.watch<MyAppState>();
+    // If user is logged in, show home screen; otherwise show the login screen.
+    if (appState.isLoggedIn) {
+      return MyHomePage();
+    } else {
+      // Using ProfilePage as the login screen because it shows login fields when not logged in.
+      // Alternatively, create a dedicated LoginPage if you prefer.
+      return const ProfilePage();
+    }
   }
 }
 
@@ -689,7 +707,3 @@ class _FavoritesPageState extends State<FavoritesPage> {
     );
   }
 }
-
-
-
-

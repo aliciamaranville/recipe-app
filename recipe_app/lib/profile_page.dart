@@ -31,7 +31,8 @@ class _ProfilePageState extends State<ProfilePage> {
   final TextEditingController _emailController = TextEditingController();
   bool _rememberMe = false;
   String? _emailError;
-
+  String? _nameError;
+  
   @override
   void initState() {
     super.initState();
@@ -61,12 +62,8 @@ class _ProfilePageState extends State<ProfilePage> {
 
     if (name.isEmpty) {
       setState(() {
-        _emailError = null;
+        _nameError = 'Please enter your name';
       });
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Please enter your name')),
-      );
-      return;
     }
 
     if (email.isEmpty) {
@@ -85,6 +82,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
     setState(() {
       _emailError = null;
+      _nameError = null;
     });
     appState.login(name, email, remember: _rememberMe);
   }
@@ -127,7 +125,7 @@ class _ProfilePageState extends State<ProfilePage> {
             if (!appState.isLoggedIn) ...[
               _buildLoginSection(appState),
             ] else ...[
-              const SizedBox(height: 20),
+              const SizedBox(height: 5),
               Center(
                 child: Stack(
                   alignment: Alignment.center,
@@ -145,14 +143,14 @@ class _ProfilePageState extends State<ProfilePage> {
                       backgroundColor: Colors.grey[200],
                       child: const Icon(
                         Icons.person,
-                        size: 50,
+                        size: 40,
                         color: Colors.grey,
                       ),
                     ),
                   ],
                 ),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 5),
               Center(
                 child: Text(
                   appState.userName ?? 'John Doe',
@@ -162,7 +160,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                 ),
               ),
-              const SizedBox(height: 10),
+              const SizedBox(height: 5),
               Center(
                 child: Text(
                   appState.userEmail ?? 'john.doe@example.com',
@@ -174,15 +172,16 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
               const SizedBox(height: 30),
               _buildSectionTitle('Preferences'),
+              const SizedBox(height: 15),
               _buildPreferenceSection(
                 'Favorite Cuisines',
                 appState.favoriteCuisines,
                 _allCuisines,
                 (selected) => appState.updatePreferences(newCuisines: selected),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 25),
               _buildCookingTimeSection(appState),
-              const SizedBox(height: 20),
+              const SizedBox(height: 25),
               _buildPreferenceSection(
                 'Dietary Preferences',
                 appState.dietaryPreferences,
@@ -225,7 +224,15 @@ class _ProfilePageState extends State<ProfilePage> {
                 borderRadius: BorderRadius.circular(8),
               ),
               prefixIcon: const Icon(Icons.person),
+              errorText: _nameError,
             ),
+            onChanged: (value) {
+              if (_nameError != null) {
+                setState(() {
+                  _nameError = null;
+                });
+              }
+            },
           ),
           const SizedBox(height: 16),
           TextField(
@@ -295,12 +302,23 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget _buildSectionTitle(String title) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 16.0),
-      child: Text(
-        title,
-        style: GoogleFonts.dmSans(
-          fontSize: 18,
-          fontWeight: FontWeight.w600,
-        ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title.toUpperCase(),
+            style: GoogleFonts.dmSans(
+              fontSize: 18,
+              fontWeight: FontWeight.w600,
+              color: Colors.grey[900],
+            ),
+          ),
+          Container(
+            height: 1.5,
+            width: double.infinity,
+            color: Colors.grey[600] // Adjust the color as needed
+          ),
+        ],
       ),
     );
   }
