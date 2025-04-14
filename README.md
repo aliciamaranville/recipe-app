@@ -22,7 +22,7 @@ To run Food Finder from source or contribute to the codebase, you’ll need:
 - Flutter SDK
 - Dart (comes bundled with the Flutter SDK)
 - A code editor with the Flutter plugin (VSCode is recommended)
-- Xcode --> For iOS device emulator to run the app
+- Xcode --> For iOS device emulator
 
 
 ## Installation Guide
