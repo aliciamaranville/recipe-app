@@ -23,6 +23,7 @@ To run Food Finder from source or contribute to the codebase, you’ll need:
 - Dart (comes bundled with the Flutter SDK)
 - A code editor with the Flutter plugin (VSCode is recommended)
 - Xcode --> For iOS device emulator
+- zsh as default shell
 
 
 ## Installation Guide
@@ -32,7 +33,7 @@ Running the App from Source (Flutter)
 1. Clone the repository
 
 ```bash
-git clone https://github.com/aliciamaranville/food-finder.git
+$ git clone https://github.com/aliciamaranville/food-finder.git
 ```
 
 3. Create File Structure
@@ -47,23 +48,31 @@ aliciamaranville/projects.nosync/recipe-app
 4. Install dependencies
 
 ```bash
-flutter pub get
+$ flutter pub get
 ```
 
-5. Open xCode simulator
-
-6. Select whatever phone you are using on the simulator as your target device in the bottom right corner of VSCode
-
-7. Navigate to recipe-app directory
+5. Configure iOS Simulator
 
 ```bash
-cd recipe_app
+# To install the iOS Simulator, run the following command.
+$ xcodebuild -downloadPlatform iOS
+
+# To start the Simulator, run the following command:
+$ open -a Simulator
+```
+
+7. Select whatever phone you are using on the simulator as your target device in the bottom right corner of VSCode
+
+8. Navigate to recipe-app directory
+
+```bash
+$ cd recipe_app
 ```
 
 8. Run the application
 
 ```bash
-flutter clean && flutter pub get && flutter run
+$ flutter clean && flutter pub get && flutter run
 ```
 
 ```
