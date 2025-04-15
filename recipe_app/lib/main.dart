@@ -22,6 +22,7 @@ class RecipeApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Recipe App',
         home: const LoginPage(),
+        //home: MyHomePage(),
       ),
     );
   }
@@ -56,7 +57,6 @@ class MyAppState extends ChangeNotifier {
 
   void removeFolder(String name) {
     if (name != 'All Recipes' && folders.containsKey(name)) {
-      // Move recipes from deleted folder to 'All Recipes'
       folders['All Recipes']!.addAll(folders[name]!);
       folders.remove(name);
       notifyListeners();
@@ -88,7 +88,6 @@ class MyAppState extends ChangeNotifier {
       }
     } else {
       favorites.add(current);
-      // Add to 'All Recipes' folder
       folders['All Recipes']!.add(current);
     }
     notifyListeners();
@@ -99,6 +98,7 @@ class MyAppState extends ChangeNotifier {
     notifyListeners();
   }
 
+  // Update preferences
   void updatePreferences({
     List<String>? newCuisines,
     String? newCookingTime,
@@ -110,6 +110,7 @@ class MyAppState extends ChangeNotifier {
     notifyListeners();
   }
 
+  // Login info
   void login(String name, String email, {bool remember = false}) {
     userName = name;
     userEmail = email;
@@ -134,12 +135,9 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appState = context.watch<MyAppState>();
-    // If user is logged in, show home screen; otherwise show the login screen.
     if (appState.isLoggedIn) {
       return MyHomePage();
     } else {
-      // Using ProfilePage as the login screen because it shows login fields when not logged in.
-      // Alternatively, create a dedicated LoginPage if you prefer.
       return const ProfilePage();
     }
   }
@@ -190,7 +188,7 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
             child: Container(
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: Colors.pink[100]?.withOpacity(0.3),
+                color: Colors.purple[200]?.withOpacity(0.3),
               ),
               child: IconButton(
                 icon: const Icon(Icons.person),
@@ -224,7 +222,6 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
   }
 }
 
-
 class SwipingPage extends StatefulWidget {
   const SwipingPage({
     super.key,
@@ -241,7 +238,6 @@ class _SwipingPageState extends State<SwipingPage> {
   @override
   void initState() {
     super.initState();
-    // The initialIndex will be set in the build method through context.watch
   }
 
   @override
@@ -286,32 +282,32 @@ class _SwipingPageState extends State<SwipingPage> {
                       controller.swipe(CardSwiperDirection.left);
                     },
                     style: ElevatedButton.styleFrom(
-                      shape: CircleBorder(), // Makes the button circular
-                      padding: EdgeInsets.all(16), // Adjust padding as needed
-                      backgroundColor: Colors.red, // Button fill color
+                      shape: CircleBorder(), 
+                      padding: EdgeInsets.all(16),
+                      backgroundColor: Colors.red,
                     ),
-                    child: Icon(Icons.close, color: Colors.white), // Regular icon
+                    child: Icon(Icons.close, color: Colors.white),
                   ),
                   ElevatedButton(
                     onPressed: () { 
                       controller.swipe(CardSwiperDirection.right);
                     },
                     style: ElevatedButton.styleFrom(
-                      shape: CircleBorder(), // Makes the button circular
-                      padding: EdgeInsets.all(16), // Adjust padding as needed
-                      backgroundColor: Colors.green, // Button fill color
+                      shape: CircleBorder(), 
+                      padding: EdgeInsets.all(16), 
+                      backgroundColor: Colors.green, 
                     ),
-                    child: Icon(Icons.favorite, color: Colors.white), // Regular icon
+                    child: Icon(Icons.favorite, color: Colors.white),
                   ),
                   ElevatedButton(
                     onPressed: () { 
-                      controller.undo();  // Fixed the undo call
+                      controller.undo(); 
                     },
                     style: ElevatedButton.styleFrom(
-                      shape: CircleBorder(), // Makes the button circular
-                      padding: EdgeInsets.all(16), // Adjust padding as needed
+                      shape: CircleBorder(), 
+                      padding: EdgeInsets.all(16),
                     ),
-                    child: Icon(Icons.rotate_left, color: Colors.black), // Regular icon
+                    child: Icon(Icons.rotate_left, color: Colors.black), 
                   ),
                 ],
               ),
@@ -379,7 +375,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              'Recipe Options',
+              'Options',
               style: GoogleFonts.dmSans(
                 fontSize: 18,
                 fontWeight: FontWeight.w600,
@@ -499,7 +495,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
               }
             },
             style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.pink[200],
+              backgroundColor: Colors.purple[200],
             ),
             child: Text(
               'Create',
@@ -564,11 +560,11 @@ class _FavoritesPageState extends State<FavoritesPage> {
                                 _selectedFolder = folderName;
                               });
                             },
-                            backgroundColor: Colors.grey[200],
-                            selectedColor: Colors.pink[100],
-                            checkmarkColor: Colors.pink,
+                            backgroundColor: Colors.grey[300],
+                            selectedColor: Colors.purple[100],
+                            checkmarkColor: Colors.purple,
                             labelStyle: GoogleFonts.dmSans(
-                              color: isSelected ? Colors.pink : Colors.black,
+                              color: isSelected ? Colors.purple : Colors.black,
                               fontWeight: FontWeight.w500,
                             ),
                           ),
@@ -581,7 +577,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
               IconButton(
                 icon: const Icon(Icons.create_new_folder),
                 onPressed: () => _showAddFolderDialog(context),
-                color: Colors.pink[200],
+                color: Colors.purple[300],
               ),
             ],
           ),

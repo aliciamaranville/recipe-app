@@ -42,24 +42,30 @@ class ExpandedRecipeView extends StatelessWidget {
                   ),
                   const SizedBox(height: 10),
                   Wrap(
-                    spacing: 8.0,
+                    spacing: 4.0,
+                    alignment: WrapAlignment.center,
                     children: recipe.keywords.map((keyword) {
-                      return Chip(
-                        label: Text(
+                      return Container(
+                        padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 10),
+                        decoration: BoxDecoration(
+                          color: Colors.purple[100],
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Text(
                           keyword,
                           style: GoogleFonts.dmSans(
-                            fontSize: 14,
+                            fontSize: 17,
+                            color: Colors.black,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
-                        backgroundColor: Colors.pink[100],
                       );
                     }).toList(),
                   ),
                   const SizedBox(height: 20),
                   Row(
                     children: [
-                      Icon(Icons.timer, color: Colors.pink[200]),
+                      Icon(Icons.timer, color: Colors.purple[200]),
                       const SizedBox(width: 8),
                       Text(
                         'Prep Time: ${recipe.preptime}',
@@ -69,7 +75,7 @@ class ExpandedRecipeView extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(width: 20),
-                      Icon(Icons.timer, color: Colors.pink[200]),
+                      Icon(Icons.timer, color: Colors.purple[200]),
                       const SizedBox(width: 8),
                       Text(
                         'Cook Time: ${recipe.cooktime}',
@@ -82,48 +88,78 @@ class ExpandedRecipeView extends StatelessWidget {
                   ),
                   const SizedBox(height: 30),
                   Text(
-                    'Ingredients',
+                    'INGREDIENTS',
                     style: GoogleFonts.dmSans(
-                      fontSize: 24,
+                      fontSize: 22,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
+                  Container(
+                    height: 1,
+                    width: double.infinity,
+                    color: Colors.grey[600],
+                  ),
                   const SizedBox(height: 10),
                   Text(
-                    '• 2 cups flour\n• 1 cup sugar\n• 1 tsp baking powder\n• 1/2 cup milk\n• 2 eggs\n• 1/2 cup butter\n• 1 tsp vanilla extract\n• 1/2 tsp salt',
+                    recipe.ingredients,
                     style: GoogleFonts.dmSans(
                       fontSize: 16,
                     ),
                   ),
                   const SizedBox(height: 30),
                   Text(
-                    'Instructions',
+                    'INSTRUCTIONS',
                     style: GoogleFonts.dmSans(
-                      fontSize: 24,
+                      fontSize: 22,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
+                  Container(
+                    height: 1,
+                    width: double.infinity,
+                    color: Colors.grey[600],
+                  ),
                   const SizedBox(height: 10),
                   Text(
-                    '1. Preheat oven to 350°F\n2. Mix dry ingredients in a large bowl\n3. Add wet ingredients and mix until smooth\n4. Pour batter into prepared pan\n5. Bake for 30-35 minutes\n6. Let cool before serving',
+                    recipe.instructions,
                     style: GoogleFonts.dmSans(
                       fontSize: 16,
                     ),
                   ),
                   const SizedBox(height: 30),
                   Text(
-                    'Nutrition Information',
+                    'NUTRITION INFORMATION',
                     style: GoogleFonts.dmSans(
-                      fontSize: 24,
+                      fontSize: 22,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
+                  Container(
+                    height: 1,
+                    width: double.infinity,
+                    color: Colors.grey[600],
+                  ),
                   const SizedBox(height: 10),
-                  Text(
-                    'Calories: 250\nProtein: 5g\nCarbs: 35g\nFat: 10g',
-                    style: GoogleFonts.dmSans(
-                      fontSize: 16,
-                    ),
+                  Wrap(
+                    runSpacing: 10.0,
+                    spacing: 10.0,
+                    children: recipe.macros.map((macro) {
+                      return Container(
+                        padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 10),
+                        decoration: BoxDecoration(
+                          color: Colors.purple[100],
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Text(
+                          macro,
+                          style: GoogleFonts.dmSans(
+                            fontSize: 17,
+                            color: Colors.black,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      );
+                    }).toList(),
                   ),
                 ],
               ),

@@ -25,7 +25,7 @@ class _ProfilePageState extends State<ProfilePage> {
     '30-60 minutes',
     '60+ minutes'
   ];
-  int _selectedTimeIndex = 2; // Default to 30-60 minutes
+  int _selectedTimeIndex = 2; 
 
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
@@ -36,13 +36,11 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   void initState() {
     super.initState();
-    // Set initial slider position based on current preference
     _selectedTimeIndex = _cookingTimeRanges.indexOf(
       context.read<MyAppState>().preferredCookingTime
     );
-    if (_selectedTimeIndex == -1) _selectedTimeIndex = 2; // Default if not found
+    if (_selectedTimeIndex == -1) _selectedTimeIndex = 2;
 
-    // Initialize form fields if user is remembered
     final appState = context.read<MyAppState>();
     if (appState.isLoggedIn && appState.rememberMe) {
       _nameController.text = appState.userName ?? '';
@@ -135,7 +133,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       height: 120,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: Colors.pink[100]?.withOpacity(0.3),
+                        color: Colors.purple[100],
                       ),
                     ),
                     CircleAvatar(
@@ -190,7 +188,6 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
               const SizedBox(height: 20),
               _buildSectionTitle('Account Settings'),
-              _buildSettingItem(Icons.notifications, 'Notifications'),
               _buildSettingItem(Icons.lock, 'Privacy'),
               _buildSettingItem(Icons.help, 'Help & Support'),
             ],
@@ -264,7 +261,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     _rememberMe = value ?? false;
                   });
                 },
-                activeColor: Colors.pink[200],
+                activeColor: Colors.purple[200],
               ),
               Text(
                 'Remember Me',
@@ -279,7 +276,7 @@ class _ProfilePageState extends State<ProfilePage> {
           ElevatedButton(
             onPressed: () => _validateAndLogin(appState),
             style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.pink[200],
+              backgroundColor: Colors.purple[200],
               padding: const EdgeInsets.symmetric(vertical: 16),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8),
@@ -316,7 +313,7 @@ class _ProfilePageState extends State<ProfilePage> {
           Container(
             height: 1.5,
             width: double.infinity,
-            color: Colors.grey[600] // Adjust the color as needed
+            color: Colors.grey[600] 
           ),
         ],
       ),
@@ -358,10 +355,10 @@ class _ProfilePageState extends State<ProfilePage> {
                 onUpdate(newPreferences);
               },
               backgroundColor: Colors.grey[200],
-              selectedColor: Colors.pink[100],
-              checkmarkColor: Colors.pink,
+              selectedColor: Colors.purple[100],
+              checkmarkColor: Colors.purple,
               labelStyle: GoogleFonts.dmSans(
-                color: isSelected ? Colors.pink : Colors.black,
+                color: isSelected ? Colors.purple : Colors.black,
                 fontWeight: FontWeight.w500,
               ),
             );
@@ -385,10 +382,10 @@ class _ProfilePageState extends State<ProfilePage> {
         const SizedBox(height: 8),
         SliderTheme(
           data: SliderThemeData(
-            activeTrackColor: Colors.pink[200],
+            activeTrackColor: Colors.purple[200],
             inactiveTrackColor: Colors.grey[200],
-            thumbColor: Colors.pink,
-            overlayColor: Colors.pink.withOpacity(0.1),
+            thumbColor: Colors.purple,
+            overlayColor: Colors.purple.withOpacity(0.1),
             trackHeight: 4.0,
             thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 8.0),
             overlayShape: const RoundSliderOverlayShape(overlayRadius: 16.0),
@@ -434,7 +431,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
   Widget _buildSettingItem(IconData icon, String title) {
     return ListTile(
-      leading: Icon(icon, color: Colors.pink[200]),
+      leading: Icon(icon, color: Colors.purple[200]),
       title: Text(
         title,
         style: GoogleFonts.dmSans(
