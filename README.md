@@ -27,6 +27,8 @@ To run Food Finder from source or contribute to the codebase, you’ll need:
 - Xcode --> For iOS device emulator
 - zsh as default shell
 
+Install instructions found at (https://docs.flutter.dev/get-started/install)
+
 
 ## Installation Guide
 
