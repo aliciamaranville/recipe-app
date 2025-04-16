@@ -27,12 +27,10 @@ To run Food Finder from source or contribute to the codebase, you’ll need:
 - Xcode --> For iOS device emulator
 - zsh as default shell
 
-Install instructions found at (https://docs.flutter.dev/get-started/install)
+Install instructions found at https://docs.flutter.dev/get-started/install
 
 
 ## Installation Guide
-
-Running the App from Source (Flutter)
 
 1. Clone the repository
 
@@ -44,7 +42,7 @@ $ git clone https://github.com/aliciamaranville/food-finder.git
 
 ```bash
 # recipe-app needs to be nested in projects.nosync folder
-aliciamaranville/projects.nosync/recipe-app
+yourname/projects.nosync/recipe-app
 ```
 
 3. Open recipe-app in VSCode
