@@ -11,7 +11,9 @@ Food Finder helps you explore and save recipes with a simple swipe. Swipe right 
 
 **Recipe Details:** Each recipe card features key information – ingredients, cooking time, and short descriptions.
 
-**Search & Filter:** Filter recipes by cuisine, difficulty, or dietary restrictions.
+**Folders:** Create personalized folders to add your favorites to and quickly access later.
+
+**Preferences**: Click your profile icon to change preferences like cuisine type, cooking time, and diet.
 
 **User Profiles:** Create an account to sync favorites across devices.
 
@@ -86,11 +88,16 @@ Click 'Run and Debug' which will build the code and open the app in the simulato
 
 
 ## Usage
-1. Register or Continue as Guest.
-2. Swipe Cards to explore the recipe database.
+1. Type in a name and valid email to login.
+2. Home Page: Swipe card.
    - Swipe Right to save a recipe to your Favorites.
    - Swipe Left if it doesn’t appeal to you.
-3. View Recipe Details by tapping the card or from the Favorites list.
-4. Access Favorites via the Favorites icon to revisit saved recipes.
-5. Search or Filter to refine recipe results.
+   - Undo if you made a mistake on your last swipe.
+   * Tap the card to flip it and view more details about the recipe.
+3. Access Favorites via the Favorites icon on the top navigation bar to revisit saved recipes.
+   - Tap a card to view all details about a recipe.
+   - Press on a card to remove it from your favorites.
+4. Create customized folders by clicking the folder icon in the favorites page
+   - Add recipes to folders from your favorites by pressing on a card
+5. Click profile icon to change preferences and logout
 
