@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import 'package:provider/provider.dart';
@@ -9,7 +8,7 @@ import 'package:recipe_app/expanded_recipe_view.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 void main() {
-  runApp(RecipeApp());
+  runApp(const RecipeApp());
 }
 
 class RecipeApp extends StatelessWidget {
@@ -22,7 +21,6 @@ class RecipeApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Recipe App',
         home: const LoginPage(),
-        //home: MyHomePage(),
       ),
     );
   }
@@ -31,17 +29,17 @@ class RecipeApp extends StatelessWidget {
 class MyAppState extends ChangeNotifier {
   var favorites = <FlipRecipeCard>[];
   int currentIndex = 0;
-  
-  // User preferences
+
   List<String> favoriteCuisines = ['Italian', 'Mexican', 'Japanese'];
   String preferredCookingTime = '30-60 minutes';
   List<String> dietaryPreferences = ['Vegetarian'];
 
-  // Authentication state
   bool isLoggedIn = false;
   String? userName;
   String? userEmail;
   bool rememberMe = false;
+  
+  bool tutorialShown = false;
 
   // Folders
   final Map<String, List<FlipRecipeCard>> folders = {
@@ -98,7 +96,6 @@ class MyAppState extends ChangeNotifier {
     notifyListeners();
   }
 
-  // Update preferences
   void updatePreferences({
     List<String>? newCuisines,
     String? newCookingTime,
@@ -110,12 +107,12 @@ class MyAppState extends ChangeNotifier {
     notifyListeners();
   }
 
-  // Login info
   void login(String name, String email, {bool remember = false}) {
     userName = name;
     userEmail = email;
     isLoggedIn = true;
     rememberMe = remember;
+    tutorialShown = false;
     notifyListeners();
   }
 
@@ -148,13 +145,49 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateMixin {
+class _MyHomePageState extends State<MyHomePage>
+    with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
   @override
   void initState() {
     super.initState();
     _tabController = TabController(length: 2, vsync: this);
+    
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final appState = Provider.of<MyAppState>(context, listen: false);
+      if (appState.isLoggedIn && !appState.tutorialShown) {
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: Text(
+              "Welcome to Food Finder!",
+              style: GoogleFonts.dmSans(fontWeight: FontWeight.w600),
+            ),
+            content: Text(
+              "How to get started:\n\n"
+              "• Swipe right to add a recipe to your favorites.\n"
+              "• Swipe left to skip a recipe.\n"
+              "• Tap a recipe to view more details.",
+              style: GoogleFonts.dmSans(),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  // Mark the tutorial as shown so this popup does not appear again.
+                  appState.tutorialShown = true;
+                  Navigator.of(context).pop();
+                },
+                child: Text(
+                  "Got it",
+                  style: GoogleFonts.dmSans(),
+                ),
+              ),
+            ],
+          ),
+        );
+      }
+    });
   }
 
   @override
